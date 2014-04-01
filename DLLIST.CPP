@@ -1,5 +1,6 @@
 #include    "dllist.h"
-
+ghjkghjkg
+this will error
 // --------------------------
 // GDList class functions
 // --------------------------
