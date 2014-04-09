@@ -1,5 +1,5 @@
 #include "dstring.h"
-
+gfdgfd
 
 DString& DString::operator+=(const DString& right)
 {

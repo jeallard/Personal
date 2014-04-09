@@ -1,6 +1,7 @@
 #ifndef FACTFILE_H
 #define FACTFILE_H
 
+hjl gyui gyu
 #include    "progfile.h"
 
 class FactFile : public ProgFile {
