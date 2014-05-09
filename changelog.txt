@@ -1,0 +1,523 @@
+SmartGit/Hg 5.0.6 (2014-01-17)
+==============================
+New Features, Improvements
+--------------------------
+- GitHub:
+  - in case of multiple github.com accounts, the matching one based on the
+    account is used
+  - merge option to just close a pull request (because it has been manually
+    merged)
+  - support for pull request "header" comments
+- Pull (SVN): shows remote selection dialog and honors tracked remote, as it's
+  done in case of multiple Git remotes
+
+Fixed Bugs
+----------
+- Git:
+  - Add Branch: automatic stash did not work when trying to overwrite
+    existing branch
+  - Commit: empty merge commit can't be committed when Files view is focussed
+  - Git-Flow:
+    - cannot be switched off if configured remote != "origin"
+    - possible confusion in case of multiple remotes
+  - GitHub:
+    - merge did not create virtual pull request commits
+    - fetching pull request might fail with "Could not determine remote entry
+      for pull request anchor"
+    - local pull request refs should be composed from number (instead of
+      internal id)
+  - Log:
+    - Compare with Local:
+      - was disabled when having the first commit selected
+      - in the occurring compare window the wrong file name is shown for the
+        Working Tree
+    - did not open if HEAD was invalid (e.g. after an orphan checkout)
+    - possible internal error in case of invalid HEADs
+    - Comments table rows might become too large
+    - Git-Flow: "develop" was not layed out in the first column only
+  - Refresh: possible internal error related to invalid HEAD
+  - Project|Repository Settings: was disabled for missing roots
+- Hg:
+  - Log: internal error having a virtual merge commit selected
+  - don't modify HOME on Windows
+  - did not check <mercurial-install>\hgrc.d\Paths.rc before adding
+    "web.cacerts" config option
+- SVN:
+  - Clone/Pull: possible internal error related to symlink handling
+  - Branches view:
+    - local branches should be able to get SVN as well as Git remote tracked
+      branch
+    - remote branches referring to a Git remote were still displayed below the
+      SVN remote
+  - Log, Merge: did not offer to create Merge commit
+  - Pull: "can't pull into SVN clone" with multiple remotes
+  - Push: possible false-positive 'force' warning when using an additional Git
+    remote
+  - various commands:
+    - SVN-related warnings for Git remote tracking branches
+    - possible confusion when working with additional Git remotes
+- OS X:
+  - Commit message input fields: cursor up/down did not work correctly for the
+    first/last line when having wrapped lines
+  - possible internal error clicking the SmartGit dock icon
+  - internal errors related to tree controls
+
+
+SmartGit/Hg 5.0.5 (2013-12-20)
+==============================
+Fixed Bugs
+----------
+- SVN: possible internal error when cloning
+- OS X:
+  - collapsing tree nodes caused internal error (regression)
+  - possible internal error for the Branches view
+
+
+SmartGit/Hg 5.0.4 (2013-12-17)
+==============================
+New Features, Improvements
+--------------------------
+- Git:
+  - Bugtraq: compatibility with v0.3 (special link support)
+  - GitHub:
+    - latest pull requests are displayed first
+    - merge commit message now defaults to Pull Request title
+    - merge option to perform local merge
+    - reasonable error message if a command fails because of missing access
+      rights
+
+Fixed Bugs
+----------
+- Git:
+  - GitHub:
+    - one page too few has been loaded
+    - fetching pull request might fail with "Could not determine remote entry
+      for pull request anchor ..." error
+    - reading comments may fail with "Expected line starting with '', '+' or
+      '-'" error 
+  - Git-Flow: possible internal error when starting a Hotfix or Release
+  - Log:
+    - file log: commits from merge source may be missing if file has been
+      created in merge sources
+    - possible internal error related to Files view in case of duplicate file
+      names
+    - locally present pull request might have not been selectable nor
+      revealable
+  - Bugtraq: invalid configuration caused refresh to fail
+  - remotes without "fetch=" refspec were not recognized
+- SVN:
+  - Clone/Pull: possible "Connection reset" problems
+  - Clone: possible internal error
+- GUI:
+  - Branches view: performance problem in case of many refs
+  - Compare: "file is too large" displayed too often, reverted back to v4.6
+    fixed-size limit
+  - tree drag and drop: previously selected node was dragged even if the drag
+    has been started on a non-selected node
+  - trees:
+    - icon was not correctly updated on selection change
+    - possible internal errors (especially related to the Branches view)
+- Linux: new directories were not correctly scanned after switching back to
+  SmartGit
+- default smartgit.properties contained obsolete smartgit.github.url entry
+- SmartGit exited on startup in case .ssh/known_hosts contained invalid entries
+
+
+SmartGit/Hg 5.0.3 (2013-11-29)
+==============================
+New Features, Improvements
+--------------------------
+- Bugtraq: multiple configurations should be applied in the same commit
+  message
+- Git Flow: configuration should not require Remote, so it works for
+  standalone repositories as well
+- GitHub: token will now be used as password for Git operations, too, so
+  there is no more need to enter the account password
+- OS X: text fields should use Cmd+Return or Keypad-Enter to invoke
+  default button
+- Push: better wording in instructions text
+- Clone: system property "smartgit.core.clone.noHardLinks" to add
+  "--no-hardlinks" option
+
+Fixed Bugs
+----------
+- Clone/other operations (SVN): might have failed due to NTLM-related
+  problems
+- Git Flow: might have reported "feature already existing" warning,
+  even there is no such feature locally or in the configured remote
+  repository
+- GitHub: might have composed URLs from wrong remote and subsequently
+  failed with "not found" error
+- Log:
+  - internal error on Goto Next/Previous Commit in case of many
+    candidate commits
+  - possible internal error after deleting repository outside of
+    SmartGit/Hg
+- Refresh:
+  - "--skip-worktree" files should not show up at all (instead of
+    showing up as "untracked")
+  - should not fail in case of invalid bugtraq configuration
+- Various commands: possible internal error related to trees
+
+
+SmartGit/Hg 5.0.2 (2013-11-20)
+==============================
+New Features, Improvements
+--------------------------
+- ability to configure completion shortcut for text input fields/editors
+  (by default Ctrl+Space) in accelerators.xml
+- Preferences, Commands > Log: options to disable GitHub integration or whether
+  to ask for master-password
+- avatar-server can be configured in smartgit.properties
+- GitHub: support for "git@github.com:project"-URLs
+
+Fixed Bugs
+----------
+- Branches:
+  - possible internal error invoking operations on directory selection without
+    having local branches in the repository
+- Outgoing:
+  - shown commits might be outdated causing internal error, e.g. when using
+    Java 1.6 on Linux
+- GitHub:
+  - certain operations fail if cloned URL did not end with ".git"
+- Index Editor/Conflict Solver: possible internal error
+- GUI:
+  - tree-control-related internal errors
+  - Compare: change stripe could flicker when scrolling
+  - Changes view: the gutter showed linenumber 1 even if no file was shown
+  - Preferences, GitHub provider Edit dialog: OK button not enabled if Client
+    Certificate input field is empty
+  - OS X, text editors/commit message: pressing Up/Down in first/last line did
+    not put caret at first/last position
+  - OS X: some table columns, e.g. in the Preferences dialog, were too narrow
+  - Windows, Aero theme: strange flickering when opening windows
+
+
+SmartGit/Hg 5.0.1 (2013-11-07)
+==============================
+Fixed Bugs
+----------
+- Clone: for Non-GitHub hosting providers, account may be displayed
+  with leading slash in table
+- Compare/Change View: possible out-of-memory-error in case of huge text
+  files
+- Log:
+  - bugtraq configuration did not work in case of multiple entries
+  - Delete Comment: did not ask for confirmation
+  - possible internal error after closing
+  - revealing commit might not work properly
+- Startup: "settings.xml" of version 4.6 might be considered corrupt
+  if loading gravatars was disabled
+
+
+SmartGit/Hg 5.0.0 (2013-11-05)
+==============================
+New Features, Improvements
+--------------------------
+- Hosting Provider configuration: the name is not required to add a provider
+  configuration
+- Hosting Provider repository table: uses single selection
+
+Fixed Bugs
+----------
+- when upgrading the full setup wizard was shown though not needed
+
+
+SmartGit/Hg 5 rc 3 (2013-10-31)
+===============================
+New Features, Improvements
+--------------------------
+- Changes view: removed obsolete file-size limiting property
+  smartgit.compare.maximumFileSize
+- GitHub:
+  - Pull Requests related commands are available for non-local Pull
+    Requests, too
+- Hg:
+  - if hgshelve extension is not enabled, the user is asked whether to enable
+    it (download from http://mercurial.selenic.com/wiki/ShelveExtension)
+
+Fixed Bugs
+----------
+- Git:
+  - Branches:
+    - might remain with content when quickly closing project after opening it
+  - GitHub:
+    - after refresh, obsolete error message might remain
+    - possible internal error when retracting pull request
+    - content might not be refreshed correctly after invoking Pull Request
+      commands
+  - Log:
+    - Branches|Reveal Commit did not work on a tracking branch within
+      incoming changes
+    - no more commands were available on unpushed commits
+    - flickering while refreshing with "Lost Heads" selected
+    - comment ballons were drawn at incorrect locations (Linux)
+- Hg: View|Assume Unchanged was available
+- Blame: possible internal error switching View Commit
+- Clone: newly added hosting provider did not show up in Repository URL popup
+- Compare: upper block line was draw 1 pixel above in line number gutter
+- Preferences: removing and re-adding the same hosting provider failed with
+  "duplicate provider" message
+
+
+SmartGit/Hg 5 rc 2 (2013-10-28)
+===============================
+New Features, Improvements
+--------------------------
+- Blame: use selection-background-color derived color for highlighting instead
+  of plain gray
+- OS X bundle ships with bundled Java 7
+- if the known_hosts file is not readable, more information is shown
+- Preferences:
+  - separate page for proxy configuration
+  - Log: option to restrict operations on special nodes (stashes/pull requests)
+- Toolbar: smoother redraw after changing it
+- Log: Git stashes show up always as "not yet pushed" (thin lines)
+
+Fixed Bugs
+----------
+- GitHub:
+  - GitHub (Enterprise): requesting a token did not work when using client
+    certificates
+  - Add/Edit Comment was enabled even if no comment had been selected
+- Log:
+  - internal error pressing <space> on pull-request (or toggling from
+    context menu)
+  - lost head commits were shown with bold lines ("pushed")
+  - possible internal error closing window while command was running
+- notification popup:
+  - might not be moved correctly when maximizing/restoring window
+  - for short notifications the icon might be cut-off
+- Blame: internal error changing "View Commit" option
+- Hg: - Blame: showed "who?" instead of author
+- SVN: - authentication dialog did not remember password when it was known
+  before and it was not changed by the user
+
+
+SmartGit/Hg 5 rc 1 (2013-10-22)
+===============================
+New Features, Improvements
+--------------------------
+- Log:
+  - "Branch" menu should have similar order as in main window
+  - more default accelerators
+
+Fixed Bugs
+----------
+- Blame: mouse wheel did not work in "gutter" area
+- Conflict Solver: mouse wheel did not work in "connector" area
+- External Tools: changing /usr/bin/git to /usr/local/bin/git should not
+  change unrelated tools, like /usr/bin/gnome-terminal to
+  /usr/local/bin/gnome-terminal
+- GitHub: bad conversion of settings might have resulted in
+  various internal errors
+- Installation: virtual dependency in .deb package fixed
+- Log:
+  - Details view: SHA links were always referring to the first commit
+    which was selected when opening the Log frame (usually HEAD)
+  - "Insignificant Merges" option (files) might have trimmed
+    significant merge commits
+- Start Up: crash on Ubuntu 13.10+
+  (workaround by setting UBUNTU_MENUPROXY=0 in smartgit.sh)
+
+
+SmartGit/Hg 5 preview 4 (2013-10-17)
+====================================
+New Features, Improvements
+--------------------------
+- Hosting Providers: ability to configure multiple accounts even for the same
+  provider
+- Log:
+  - Branches: Delete works on multiple refs (as in project window)
+  - GitHub:
+    - Refresh toolbar button is now only enabled if a GitHub account is
+      configured
+    - Details view links to GitHub webpage for the selected commit
+  - Reveal Commit now also works on Pull Requests
+  - easily switch between two different view layouts (similar to project window)
+- Project|Repository Settings is now enabled not just if the repository root
+  directory is selected and focused, but also if files are selected/focused
+- Commit message input field:
+  - same configurable font as for text editors (Compare, Conflict Solver, ...)
+    is used
+  - added Undo/Redo support
+- Notifications should be more obvious now
+- updated bundled Git versions and JRE
+
+Fixed Bugs
+----------
+- Git:
+  - GitHub:
+    - Refresh could fail if local pull requests did not have comments
+    - fetching virtual Pull Request commit may have wrong primary parent
+    - very inefficient query for pull request comments for repositories with a
+      large number of pull requests
+    - possible internal error in combination with comments and multiple GitHub
+      remotes
+    - query should not be interrupted in case of locally missing commits
+    - possible internal error querying Pull Requests
+    - Create Pull Request: did not allow to create Pull Requests for all GitHub
+      remotes
+  - Log:
+    - Branches: possible internal error toggling a Pull Request
+    - Changes: multi-line comments confused display
+  - Refresh:
+    - possible internal error if window is closed while a refresh is
+      running
+    - possible internal error if sub-sub-module structure changed
+- Hg:
+  - possible internal error if shelves are present
+- GUI:
+  - Annotate: possible internal error painting line numbers
+  - Notification links were processed on mouse *move* (instead mouse up)
+  - OS X: if all application windows were minimized and the dock icon clicked,
+    the last minimized window was not restored
+
+SmartGit/Hg 5 preview 3 (2013-10-09)
+====================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Git-Flow:
+    - Finish Hotfix/Release: ask whether to overwrite tag if it already exists
+  - Log:
+    - View|Group Commits By Branch become a global option
+- SVN:
+  - detect and inform about Subversion issue #4129
+- External tools:
+  - tools which use a git command will be corrected if a different git
+    executable is selected
+  - the path for the configured Git or Hg executable are added to the PATH of
+    the launched command
+  - Windows: a separate tools menu item "Open Git-Shell" is created in the
+    setup wizard
+- Help: opens the website help (because local PDF may become outdated)
+
+Fixed Bugs
+----------
+- Git:
+  - Index Editor: internal error saving working tree modification
+  - Log:
+    - Reveal Commit sometimes did not work
+    - tri-state checkboxes did not work correcly
+- GUI:
+  - Commit dialog:
+    - Shift+Enter closed the dialog
+    - line limit display might remain even "Use monospace-font" has been
+      unselected
+  - Edit Conflict Solver: possible modification of edited object even if
+    pressing Cancel
+
+
+SmartGit/Hg 5 preview 2 (2013-10-04)
+====================================
+New Features, Improvements
+--------------------------
+- GitHub/other hosting providers: should store repository table sorting
+  and dialog bounds
+- Log: anchor should be moved when moving HEAD
+
+Fixed Bugs
+----------
+- Branches view: branches with same name (but different remote) may
+  occur in random order
+- Bugtraq Configuration:
+  - "logIdRegex" should be "logRegex"
+  - problems in case of invalid patterns
+- GitHub: not all user/org repositories were listed
+  (paging was not supported)
+- Log: messages were duplicated, if Bugtraq Configuration was used
+- Outgoing Commits: clicking link did not open browser
+- Setup: possible internal error
+
+
+SmartGit/Hg 5 preview 1 (2013-10-02)
+====================================
+New Features, Improvements
+--------------------------
+- Git:
+  - Git-Flow:
+    - support for "gitflow.origin" configuration property
+    - Start Hotfix: suggests "reasonable" name
+    - Branches:
+      - origin/develop and origin/master are shown on top, too
+      - context menu items
+    - Log:
+      - try to show refs in order: develop, feature branches, release branches,
+        master, hotfix-branches
+  - GitHub:
+    - Log commit comments (review feature)
+    - Pull-request support (create, execute, close)
+    - clone support for organization repositories
+    - switched to 2-factor-authentication
+    - configuration option for custom GitHub installation (GitHub Enterprise)
+  - Log:
+    - ability to Push/Fetch
+    - shows pushable commits with thin lines
+    - shows ahead/behind commits for tracking branches
+    - drag-and-drop support:
+      - move head (checkout/switch branch)
+      - reset current branch
+      - move arbitrary refs (update-ref)
+      - rebase range
+      - cherry-pick
+    - Files:
+      - option to show unchanged files
+      - added Ext. column
+      - for merge commits all modifications relative to the primary parent are
+        shown
+      - remembers column order
+    - Delete context menu items depending on right-clicked ref
+  - bugtraq support (convert issue IDs to links, see
+    <https://github.com/mstrap/bugtraq>)
+  - Assume Unchanged support
+  - Commit:
+    - works now without explicit file selection
+    - preferences option for fixed font and highlighting of too-long
+      lines (line 1: max. 50 characters, line 2: no character, further lines:
+      max. 72 characters)
+  - Join Commits:
+    - renamed to Squash Commits
+    - ability to select authorship
+  - Merge: made aborting easier by clicking Merge again
+  - Rebase: made continuing/aborting easier determinable by new users
+  - Push To: allows to synchronize one remote with another
+  - unified preferences options "Allow to amend pushed commits" and "Allow
+    'forced' push" to "Allow modifying pushed commits (e.g. forced push)"
+    because one made no sense without the other
+  - Files table: added "State" column (unifying "Index State" and "Working Tree
+    State" columns
+  - Repository Settings: "Make Default" also applies for user settings now
+- Hg:
+  - Annotate
+  - Changes view: performance improvements for large repositories
+  - Log: changes shows left/right comparison for copied files
+  - Shelve support
+  - Commit: "Add untracked files" option from preferences was not used
+- Conflict Solver:
+  - ability to configure different conflict solvers for different file types
+  - better labels
+- GUI:
+  - Welcome dialog, Project Manager: improved visual presentation
+  - Log, Branches: tri-state checkboxes for easier selecting all/deselecting
+    all children
+  - preferences option to show executed commands
+  - Changes: shows quick overview, e.g. +5-2~6
+  - no View|Table Columns any more - they configuration is remembered
+    automatically
+  - Commit message input field supports Ctrl+Backspace now
+
+Fixed Bugs
+----------
+- Git:
+  - Integrate Develop: shows green in Output even if failed with conflict
+  - several commands did not update submodules
+  - Delete Remote Branch: even if deletion failed, Output showed green
+- Hg:
+  - Log: copied files were not detected properly
+  - possible performance problems related to outdated .hg/branches cache
+- SVN:
+  - Submodules of a snapshot repository must be snapshots, too
+- GUI:
+  - Compare: the unified scrollbar was only visible when scrolling (OS X 10.8)
